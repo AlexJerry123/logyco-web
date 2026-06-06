@@ -1,192 +1,111 @@
 'use client'
-import { useEffect, useRef } from 'react'
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-
-    // Animated grid of dots - navy/orange palette
-    const dots: { x: number; y: number; opacity: number; speed: number; orange: boolean }[] = []
-    const spacing = 52
-    for (let x = 0; x < canvas.width; x += spacing) {
-      for (let y = 0; y < canvas.height; y += spacing) {
-        dots.push({
-          x, y,
-          opacity: Math.random() * 0.3,
-          speed: 0.002 + Math.random() * 0.005,
-          orange: Math.random() > 0.85,
-        })
-      }
-    }
-
-    // Animated lines between dots (barcode / scan effect)
-    let frame = 0
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      frame++
-      dots.forEach((dot, i) => {
-        dot.opacity = 0.03 + Math.abs(Math.sin(frame * dot.speed + i)) * 0.15
-        ctx.beginPath()
-        ctx.arc(dot.x, dot.y, 1.4, 0, Math.PI * 2)
-        if (dot.orange) {
-          ctx.fillStyle = `rgba(255, 77, 58, ${dot.opacity * 1.5})`
-        } else {
-          ctx.fillStyle = `rgba(100, 130, 200, ${dot.opacity})`
-        }
-        ctx.fill()
-      })
-      requestAnimationFrame(animate)
-    }
-    animate()
-
-    const onResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
-
   return (
     <section style={{
-      position: 'relative',
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      overflow: 'hidden',
-      background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,35,71,0.4) 0%, transparent 60%), var(--black)',
+      paddingTop: '140px',
+      paddingBottom: '100px',
+      paddingLeft: '48px',
+      paddingRight: '48px',
+      maxWidth: '1200px',
+      margin: '0 auto',
     }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.7 }} />
-
-      {/* Glow orbs */}
-      <div style={{
-        position: 'absolute', top: '15%', right: '15%',
-        width: '500px', height: '500px',
-        background: 'radial-gradient(circle, rgba(255,77,58,0.07) 0%, transparent 70%)',
-        borderRadius: '50%', filter: 'blur(40px)', pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: '20%', left: '5%',
-        width: '400px', height: '400px',
-        background: 'radial-gradient(circle, rgba(26,35,71,0.3) 0%, transparent 70%)',
-        borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none',
-      }} />
-
-      {/* Barcode decoration */}
-      <div style={{
-        position: 'absolute', right: '8%', top: '50%', transform: 'translateY(-50%)',
-        display: 'flex', gap: '3px', opacity: 0.06, pointerEvents: 'none',
-      }}>
-        {Array.from({length: 28}).map((_, i) => (
-          <div key={i} style={{
-            width: i % 3 === 0 ? '4px' : i % 5 === 0 ? '2px' : '3px',
-            height: '280px',
-            background: 'white',
-          }} />
-        ))}
+      {/* Label */}
+      <div className="animate-fade-up delay-1 section-label">
+        Identificación · Movilidad · Trazabilidad
       </div>
 
-      {/* Content */}
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto', padding: '120px 40px 80px' }}>
-        {/* Badge */}
-        <div className="animate-fade-up delay-1" style={{
+      {/* Headline — Orbio style: very large, tight, clean */}
+      <h1 className="animate-fade-up delay-2" style={{
+        fontSize: 'clamp(48px, 6.5vw, 88px)',
+        fontWeight: 800,
+        lineHeight: 1.05,
+        letterSpacing: '-0.03em',
+        color: 'var(--text-primary)',
+        maxWidth: '900px',
+        marginBottom: '32px',
+      }}>
+        Tecnología que conecta{' '}
+        <span style={{ color: 'var(--orange)' }}>operaciones,</span>
+        {' '}personas y datos
+      </h1>
+
+      {/* Subheadline */}
+      <p className="animate-fade-up delay-3" style={{
+        fontSize: '18px',
+        fontWeight: 400,
+        color: 'var(--text-secondary)',
+        maxWidth: '560px',
+        lineHeight: 1.7,
+        marginBottom: '48px',
+      }}>
+        Ayudamos a empresas de logística, industria y distribución a mejorar la trazabilidad, 
+        movilidad y eficiencia de sus procesos con soluciones tecnológicas avanzadas.
+      </p>
+
+      {/* CTAs */}
+      <div className="animate-fade-up delay-4" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '80px' }}>
+        <a href="#contacto" style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
-          padding: '6px 16px 6px 8px',
-          background: 'var(--orange-dim)',
-          border: '1px solid rgba(255,77,58,0.25)',
-          borderRadius: '100px',
-          marginBottom: '32px',
-        }}>
-          <div style={{
-            width: '6px', height: '6px', borderRadius: '50%',
-            background: 'var(--orange)',
-            boxShadow: '0 0 8px var(--orange)',
-            animation: 'pulse-dot 2s ease-in-out infinite',
-          }} />
-          <span style={{ fontFamily: 'var(--font-syne)', fontSize: '12px', fontWeight: 600, color: 'var(--orange)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            Identificación · Movilidad · Trazabilidad
-          </span>
-        </div>
+          padding: '14px 28px',
+          background: 'var(--navy)',
+          borderRadius: '8px',
+          fontFamily: 'var(--font-inter)', fontWeight: 500, fontSize: '15px',
+          color: '#fff',
+          transition: 'background 0.2s',
+        }}
+        onMouseEnter={e => e.currentTarget.style.background = 'var(--navy-light)'}
+        onMouseLeave={e => e.currentTarget.style.background = 'var(--navy)'}
+        >
+          Hablar con un experto →
+        </a>
+        <a href="#soluciones" style={{
+          display: 'inline-flex', alignItems: 'center', gap: '8px',
+          padding: '14px 28px',
+          background: 'transparent',
+          border: '1px solid var(--border-strong)',
+          borderRadius: '8px',
+          fontFamily: 'var(--font-inter)', fontWeight: 500, fontSize: '15px',
+          color: 'var(--text-primary)',
+          transition: 'border-color 0.2s',
+        }}
+        onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--text-primary)'}
+        onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-strong)'}
+        >
+          Ver soluciones
+        </a>
+      </div>
 
-        {/* Headline */}
-        <h1 className="animate-fade-up delay-2" style={{ fontSize: 'clamp(44px, 6vw, 78px)', fontWeight: 800, maxWidth: '860px', marginBottom: '28px' }}>
-          Tecnología que conecta{' '}
-          <span style={{ background: 'var(--gradient-accent)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-            operaciones,
-          </span>
-          {' '}personas y datos
-        </h1>
-
-        {/* Subheadline */}
-        <p className="animate-fade-up delay-3" style={{
-          fontSize: '18px', fontWeight: 300,
-          color: 'var(--text-secondary)',
-          maxWidth: '580px', lineHeight: 1.7, marginBottom: '48px',
-        }}>
-          Ayudamos a empresas de logística, industria y distribución a mejorar la trazabilidad, la movilidad y la eficiencia de sus procesos mediante soluciones tecnológicas avanzadas.
-        </p>
-
-        {/* CTAs */}
-        <div className="animate-fade-up delay-4" style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-          <a href="#soluciones" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '10px',
-            padding: '16px 32px',
-            background: 'var(--gradient-accent)',
-            borderRadius: '100px',
-            fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: '15px',
-            color: '#fff',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(255,77,58,0.35)' }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}
-          >
-            Descubrir soluciones
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </a>
-          <a href="#casos" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '10px',
-            padding: '16px 32px',
-            background: 'transparent',
-            border: '1px solid var(--border-light)',
-            borderRadius: '100px',
-            fontFamily: 'var(--font-syne)', fontWeight: 500, fontSize: '15px',
-            color: 'var(--text-primary)',
-            transition: 'border-color 0.2s, background 0.2s',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--orange)'; e.currentTarget.style.background = 'var(--orange-dim)' }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.background = 'transparent' }}
-          >
-            Ver casos de éxito
-          </a>
-        </div>
-
-        {/* Stats row */}
-        <div className="animate-fade-up delay-5" style={{
-          display: 'flex', gap: '48px', flexWrap: 'wrap',
-          marginTop: '80px', paddingTop: '48px',
-          borderTop: '1px solid var(--border)',
-        }}>
-          {[
-            { num: '+20', label: 'Años de experiencia' },
-            { num: '+500', label: 'Proyectos implantados' },
-            { num: '6', label: 'Sectores clave' },
-            { num: '+30', label: 'Partners tecnológicos' },
-          ].map(stat => (
-            <div key={stat.label}>
-              <div style={{ fontFamily: 'var(--font-syne)', fontSize: '36px', fontWeight: 800, color: 'var(--orange)', lineHeight: 1 }}>
-                {stat.num}
-              </div>
-              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '6px' }}>
-                {stat.label}
-              </div>
+      {/* Stats — Orbio style: clean numbers in a row */}
+      <div className="animate-fade-up delay-5" style={{
+        display: 'flex', gap: '0', flexWrap: 'wrap',
+        borderTop: '1px solid var(--border)',
+        borderLeft: '1px solid var(--border)',
+      }}>
+        {[
+          { num: '+20', label: 'años de experiencia' },
+          { num: '+500', label: 'proyectos implantados' },
+          { num: '6', label: 'sectores clave' },
+          { num: '+30', label: 'partners tecnológicos' },
+        ].map(stat => (
+          <div key={stat.label} style={{
+            flex: '1', minWidth: '150px',
+            padding: '28px 32px',
+            borderRight: '1px solid var(--border)',
+            borderBottom: '1px solid var(--border)',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-inter)', fontSize: '40px', fontWeight: 800,
+              color: 'var(--text-primary)', lineHeight: 1,
+              letterSpacing: '-0.03em',
+            }}>
+              {stat.num}
             </div>
-          ))}
-        </div>
+            <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '6px', fontWeight: 400 }}>
+              {stat.label}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
