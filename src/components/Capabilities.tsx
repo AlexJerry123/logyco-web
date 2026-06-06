@@ -1,57 +1,42 @@
 'use client'
 import { useState } from 'react'
 
-const capabilities = [
-  { icon: '📱', title: 'Movilidad Industrial', desc: 'Terminales robustos, ordenadores de mano y soluciones móviles para entornos exigentes de producción y logística.', tag: 'Hardware & Software' },
-  { icon: '📡', title: 'RFID', desc: 'Implantación de sistemas RFID para control de inventario, acceso y trazabilidad en tiempo real a lo largo de toda la cadena.', tag: 'Identificación automática' },
-  { icon: '📊', title: 'Trazabilidad', desc: 'Control total del ciclo de vida del producto, desde la recepción hasta la entrega, con visibilidad completa en cada punto.', tag: 'Control de procesos' },
-  { icon: '🖨️', title: 'Impresión y Etiquetado', desc: 'Soluciones de impresión industrial y etiquetado inteligente integradas con tus sistemas ERP y WMS existentes.', tag: 'Automatización' },
-  { icon: '⚙️', title: 'Automatización Operativa', desc: 'Integración de procesos operativos mediante captura de datos automática para reducir errores y optimizar tiempos.', tag: 'Eficiencia operacional' },
-  { icon: '🛠️', title: 'Servicios y Soporte', desc: 'Mantenimiento preventivo, soporte técnico, formación especializada y gestión integral del ciclo de vida del dispositivo.', tag: 'Servicio 360°' },
+const caps = [
+  { icon: '📱', title: 'Movilidad Industrial', desc: 'Terminales robustos y ordenadores de mano para entornos exigentes de producción y logística.', tag: 'Hardware & Software' },
+  { icon: '📡', title: 'RFID', desc: 'Sistemas RFID para control de inventario, acceso y trazabilidad en tiempo real.', tag: 'Identificación automática' },
+  { icon: '📊', title: 'Trazabilidad', desc: 'Control total del ciclo de vida del producto desde la recepción hasta la entrega.', tag: 'Control de procesos' },
+  { icon: '🖨️', title: 'Impresión y Etiquetado', desc: 'Impresión industrial y etiquetado inteligente integrado con ERP y WMS.', tag: 'Automatización' },
+  { icon: '⚙️', title: 'Automatización Operativa', desc: 'Captura de datos automática para reducir errores y optimizar tiempos operativos.', tag: 'Eficiencia operacional' },
+  { icon: '🛠️', title: 'Servicios y Soporte', desc: 'Mantenimiento preventivo, soporte técnico y formación especializada.', tag: 'Servicio 360°' },
 ]
 
 export default function Capabilities() {
-  const [hovered, setHovered] = useState<number | null>(null)
+  const [hov, setHov] = useState<number | null>(null)
 
   return (
-    <section id="soluciones" style={{ padding: '100px 48px', maxWidth: '1200px', margin: '0 auto' }}>
-      <div className="section-label">Nuestras capacidades</div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '24px', marginBottom: '64px' }}>
-        <h2 style={{ fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.1, maxWidth: '520px' }}>
+    <section id="soluciones" style={{ padding: '100px 48px', maxWidth: '1280px', margin: '0 auto' }}>
+      <div className="section-tag">Nuestras capacidades</div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '24px', marginBottom: '56px' }}>
+        <h2 style={{ fontSize: 'clamp(30px, 3.5vw, 48px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.08, maxWidth: '480px' }}>
           Soluciones para cada punto crítico de tu operativa
         </h2>
-        <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '340px', lineHeight: 1.7 }}>
-          Tecnología seleccionada e implantada por especialistas con más de 20 años de experiencia en el sector.
+        <p style={{ fontSize: '15px', color: 'var(--text-secondary)', maxWidth: '320px', lineHeight: 1.7 }}>
+          Tecnología implantada por especialistas con más de 20 años de experiencia en el sector.
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
-        {capabilities.map((cap, i) => (
-          <div key={cap.title}
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
-            style={{
-              padding: '40px 36px',
-              background: hovered === i ? 'var(--bg)' : 'var(--white)',
-              transition: 'background 0.2s',
-              cursor: 'default',
-            }}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--border)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
+        {caps.map((c, i) => (
+          <div key={i}
+            onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)}
+            style={{ padding: '40px 36px', background: hov === i ? 'var(--bg)' : 'var(--white)', transition: 'background 0.2s', position: 'relative' }}
           >
-            <div style={{ fontSize: '28px', marginBottom: '20px' }}>{cap.icon}</div>
-            <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '10px' }}>
-              {cap.tag}
-            </div>
-            <h3 style={{ fontSize: '18px', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: '12px', color: 'var(--text-primary)' }}>
-              {cap.title}
-            </h3>
-            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-              {cap.desc}
-            </p>
-            <div style={{
-              marginTop: '24px', fontSize: '13px', fontWeight: 500,
-              color: hovered === i ? 'var(--orange)' : 'var(--text-muted)',
-              transition: 'color 0.2s', display: 'flex', alignItems: 'center', gap: '4px',
-            }}>
+            {hov === i && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'var(--orange)' }} />}
+            <div style={{ fontSize: '28px', marginBottom: '18px' }}>{c.icon}</div>
+            <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '8px' }}>{c.tag}</div>
+            <h3 style={{ fontSize: '17px', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: '10px' }}>{c.title}</h3>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: 1.7 }}>{c.desc}</p>
+            <div style={{ marginTop: '20px', fontSize: '13px', fontWeight: 600, color: hov === i ? 'var(--orange)' : 'var(--text-muted)', transition: 'color 0.2s' }}>
               Saber más →
             </div>
           </div>

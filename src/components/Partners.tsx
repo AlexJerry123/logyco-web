@@ -1,62 +1,34 @@
 'use client'
 
 const partners = [
-  { name: 'Zebra Technologies', abbr: 'ZBR' },
-  { name: 'Honeywell', abbr: 'HON' },
-  { name: 'Datalogic', abbr: 'DAL' },
-  { name: 'SOTI', abbr: 'SOT' },
-  { name: 'Impinj', abbr: 'IMP' },
-  { name: 'Printronix', abbr: 'PRX' },
-  { name: 'Cognex', abbr: 'CGX' },
-  { name: 'Zebra Technologies', abbr: 'ZBR' },
-  { name: 'Honeywell', abbr: 'HON' },
-  { name: 'Datalogic', abbr: 'DAL' },
-  { name: 'SOTI', abbr: 'SOT' },
-  { name: 'Impinj', abbr: 'IMP' },
-  { name: 'Printronix', abbr: 'PRX' },
-  { name: 'Cognex', abbr: 'CGX' },
+  'Zebra Technologies','Honeywell','Datalogic','SOTI',
+  'Impinj','Printronix','Cognex','Intermec',
+  'Zebra Technologies','Honeywell','Datalogic','SOTI',
+  'Impinj','Printronix','Cognex','Intermec',
 ]
 
 export default function Partners() {
   return (
-    <section style={{
-      borderTop: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)',
-      padding: '48px 0',
-      background: 'var(--bg)',
-      overflow: 'hidden',
-    }}>
-      <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-        <span style={{ fontSize: '12px', fontWeight: 500, color: 'var(--text-muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+    <section style={{ background: 'var(--navy)', padding: '48px 0', overflow: 'hidden' }}>
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <span style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
           Partners tecnológicos de referencia
         </span>
       </div>
-
       <div style={{ position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', background: 'linear-gradient(90deg, var(--bg), transparent)', zIndex: 2 }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', background: 'linear-gradient(270deg, var(--bg), transparent)', zIndex: 2 }} />
-
-        <div style={{ display: 'flex', animation: 'marquee 28s linear infinite', width: 'max-content', alignItems: 'center' }}>
+        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(90deg, var(--navy), transparent)', zIndex: 2 }} />
+        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(270deg, var(--navy), transparent)', zIndex: 2 }} />
+        <div style={{ display: 'flex', animation: 'marquee 30s linear infinite', width: 'max-content', alignItems: 'center' }}>
           {partners.map((p, i) => (
-            <div key={i} style={{
-              display: 'flex', alignItems: 'center',
-              padding: '0 48px',
-              whiteSpace: 'nowrap',
-            }}>
-              {/* Logo pill */}
+            <div key={i} style={{ padding: '0 36px', whiteSpace: 'nowrap' }}>
               <div style={{
                 padding: '10px 20px',
-                border: '1px solid var(--border)',
+                border: '1px solid rgba(255,255,255,0.12)',
                 borderRadius: '8px',
-                background: 'var(--white)',
-                fontFamily: 'var(--font-inter)',
-                fontSize: '13px',
-                fontWeight: 600,
-                color: 'var(--text-secondary)',
+                fontSize: '13px', fontWeight: 600,
+                color: 'rgba(255,255,255,0.55)',
                 letterSpacing: '-0.01em',
-              }}>
-                {p.name}
-              </div>
+              }}>{p}</div>
             </div>
           ))}
         </div>
