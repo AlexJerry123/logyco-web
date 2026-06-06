@@ -1,48 +1,49 @@
 'use client'
 import { useState } from 'react'
 
+// Todas las fotos de Unsplash con parámetros w=800&h=533&fit=crop para forzar ratio 3:2
 const sectors = [
   {
-    name: 'Logística', tag: 'Logística',
+    name: 'Logística',
     desc: 'Gestión de almacén, picking optimizado, control de expediciones y visibilidad end-to-end de la cadena de suministro.',
-    img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=533&fit=crop&crop=center&q=85',
     alt: 'Almacén logístico con operarios',
     results: [{ n: '99.8%', l: 'precisión en picking' }, { n: '-68%', l: 'tiempo de inventario' }, { n: '3×', l: 'velocidad de expedición' }],
   },
   {
-    name: 'Industria', tag: 'Industria',
+    name: 'Industria',
     desc: 'Control de producción, OEE, trazabilidad de componentes y automatización de líneas con captura de datos en tiempo real.',
-    img: 'https://images.unsplash.com/photo-1565793979-7e3de21b2f9a?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&h=533&fit=crop&crop=center&q=85',
     alt: 'Línea de producción industrial',
     results: [{ n: '+22%', l: 'OEE productivo' }, { n: '100%', l: 'trazabilidad de lote' }, { n: '-40%', l: 'tiempo de reporte' }],
   },
   {
-    name: 'Retail', tag: 'Retail',
+    name: 'Retail',
     desc: 'Inventario en tiempo real, prevención de pérdidas con RFID, movilidad en punto de venta y experiencia omnicanal.',
-    img: 'https://images.unsplash.com/photo-1481437156560-3205f66da3b6?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800&h=533&fit=crop&crop=center&q=85',
     alt: 'Retail moderno con tecnología',
-    results: [{ n: '-35%', l: 'pérdida de stock' }, { n: '+18%', l: 'rotación inventario' }, { n: '100%', l: 'visibilidad en tiempo real' }],
+    results: [{ n: '-35%', l: 'pérdida de stock' }, { n: '+18%', l: 'rotación inventario' }, { n: '100%', l: 'visibilidad real-time' }],
   },
   {
-    name: 'Healthcare', tag: 'Healthcare',
+    name: 'Healthcare',
     desc: 'Trazabilidad de medicamentos, control de activos hospitalarios, identificación de pacientes y cumplimiento normativo.',
-    img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=533&fit=crop&crop=center&q=85',
     alt: 'Entorno hospitalario con tecnología',
-    results: [{ n: '-85%', l: 'tiempo de localización' }, { n: '+30%', l: 'utilización de activos' }, { n: '12 m.', l: 'ROI medio' }],
+    results: [{ n: '-85%', l: 'tiempo de localización' }, { n: '+30%', l: 'utilización activos' }, { n: '12 m.', l: 'ROI medio' }],
   },
   {
-    name: 'Alimentación', tag: 'Alimentación',
+    name: 'Alimentación',
     desc: 'Trazabilidad de lote, control de caducidades, gestión de temperatura y cumplimiento de normativa alimentaria.',
-    img: 'https://images.unsplash.com/photo-1454944338482-a69bb95894af?w=800&q=85',
-    alt: 'Industria alimentaria con control de calidad',
-    results: [{ n: '100%', l: 'trazabilidad de lote' }, { n: '-50%', l: 'mermas por caducidad' }, { n: '+25%', l: 'velocidad de control' }],
+    img: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=533&fit=crop&crop=center&q=85',
+    alt: 'Industria alimentaria',
+    results: [{ n: '100%', l: 'trazabilidad de lote' }, { n: '-50%', l: 'mermas por caducidad' }, { n: '+25%', l: 'velocidad control' }],
   },
   {
-    name: 'Transporte', tag: 'Transporte',
+    name: 'Transporte',
     desc: 'Control de flotas, gestión de envíos, captura de pruebas de entrega y visibilidad en tiempo real.',
-    img: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=85',
+    img: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&h=533&fit=crop&crop=center&q=85',
     alt: 'Flota de transporte logístico',
-    results: [{ n: '+40%', l: 'eficiencia de entrega' }, { n: '-30%', l: 'incidencias en ruta' }, { n: '100%', l: 'trazabilidad de envíos' }],
+    results: [{ n: '+40%', l: 'eficiencia entrega' }, { n: '-30%', l: 'incidencias ruta' }, { n: '100%', l: 'trazabilidad envíos' }],
   },
 ]
 
@@ -78,16 +79,18 @@ export default function Sectors() {
           ))}
         </div>
 
-        {/* Content card */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)', border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden' }}>
-          {/* Left: info + resultados */}
+        {/* Content — ratio 3:2 forzado en la imagen */}
+        <div style={{
+          display: 'grid', gridTemplateColumns: '1fr 1fr',
+          gap: '1px', background: 'var(--border)',
+          border: '1px solid var(--border)', borderRadius: '16px', overflow: 'hidden',
+        }}>
+          {/* Left: info */}
           <div style={{ padding: '56px', background: 'var(--white)' }}>
-            <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--orange)', letterSpacing: '0.09em', textTransform: 'uppercase', marginBottom: '12px' }}>{s.tag}</div>
+            <div style={{ fontSize: '10px', fontWeight: 700, color: 'var(--orange)', letterSpacing: '0.09em', textTransform: 'uppercase', marginBottom: '12px' }}>{s.name}</div>
             <h3 style={{ fontSize: '26px', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '16px' }}>{s.name}</h3>
             <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.75, marginBottom: '40px' }}>{s.desc}</p>
-
-            {/* Resultados */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
               {s.results.map((r, i) => (
                 <div key={i} style={{
                   display: 'flex', alignItems: 'center', gap: '20px',
@@ -105,20 +108,28 @@ export default function Sectors() {
             </a>
           </div>
 
-          {/* Right: imagen del sector */}
-          <div style={{ position: 'relative', overflow: 'hidden', minHeight: '420px' }}>
-            <img
-              src={s.img}
-              alt={s.alt}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'opacity 0.4s' }}
-            />
-            {/* Tag flotante */}
-            <div style={{
-              position: 'absolute', top: '24px', left: '24px',
-              background: 'rgba(26,35,71,0.92)', color: 'white',
-              padding: '8px 16px', borderRadius: '100px',
-              fontSize: '12px', fontWeight: 600, backdropFilter: 'blur(8px)',
-            }}>{s.name}</div>
+          {/* Right: imagen con ratio 3:2 forzado */}
+          <div style={{ position: 'relative', overflow: 'hidden' }}>
+            {/* Truco: padding-bottom 66.66% = ratio 3:2 */}
+            <div style={{ width: '100%', paddingBottom: '66.66%', position: 'relative', minHeight: '100%' }}>
+              <img
+                key={s.img}
+                src={s.img}
+                alt={s.alt}
+                style={{
+                  position: 'absolute', inset: 0,
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: 'center',
+                  display: 'block',
+                }}
+              />
+              <div style={{
+                position: 'absolute', top: '20px', left: '20px',
+                background: 'rgba(26,35,71,0.88)', color: 'white',
+                padding: '7px 14px', borderRadius: '100px',
+                fontSize: '12px', fontWeight: 600,
+              }}>{s.name}</div>
+            </div>
           </div>
         </div>
       </div>

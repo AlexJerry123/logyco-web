@@ -6,31 +6,26 @@ export default function Hero() {
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 48px' }}>
         <div style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr',
-          minHeight: '88vh', gap: '0',
           border: '1px solid var(--border)', borderRadius: '20px',
           overflow: 'hidden', marginTop: '24px',
         }}>
           {/* LEFT */}
           <div style={{ padding: '72px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--white)' }}>
             <div className="section-tag fu d1">Identificación · Movilidad · Trazabilidad</div>
-
             <h1 className="fu d2" style={{
-              fontSize: 'clamp(40px, 4.5vw, 68px)', fontWeight: 800,
-              letterSpacing: '-0.04em', lineHeight: 1.04,
+              fontSize: 'clamp(38px, 4vw, 62px)', fontWeight: 800,
+              letterSpacing: '-0.04em', lineHeight: 1.05,
               color: 'var(--text-primary)', marginBottom: '24px',
             }}>
-              Tecnología que conecta{' '}
-              <span style={{ color: 'var(--orange)' }}>operaciones,</span>{' '}
-              personas y datos
+              La tecnología que conecta tus operaciones,{' '}
+              <span style={{ color: 'var(--orange)' }}>de principio a fin.</span>
             </h1>
-
             <p className="fu d3" style={{
               fontSize: '17px', color: 'var(--text-secondary)',
-              lineHeight: 1.75, maxWidth: '420px', marginBottom: '40px', fontWeight: 400,
+              lineHeight: 1.75, maxWidth: '400px', marginBottom: '40px',
             }}>
-              Ayudamos a empresas de logística, industria y distribución a mejorar la trazabilidad, la movilidad y la eficiencia de sus procesos.
+              Soluciones de identificación automática, movilidad y trazabilidad para logística, industria y distribución.
             </p>
-
             <div className="fu d4" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
               <a href="#contacto" style={{
                 padding: '14px 28px', background: 'var(--navy)',
@@ -49,8 +44,6 @@ export default function Hero() {
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-strong)'}
               >Ver soluciones</a>
             </div>
-
-            {/* Stats inline */}
             <div className="fu d5" style={{
               display: 'flex', gap: '0', marginTop: '56px',
               borderTop: '1px solid var(--border)',
@@ -73,23 +66,26 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — imagen industrial con stats flotantes */}
+          {/* RIGHT — foto horizontal 16:9 */}
           <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--navy)' }}>
-            <img
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=85"
-              alt="Almacén logístico con tecnología"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.55, display: 'block' }}
-            />
-            {/* Stat card bottom-left */}
+            {/* aspect ratio container para forzar horizontal */}
+            <div style={{ position: 'absolute', inset: 0 }}>
+              <img
+                src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=900&h=600&fit=crop&crop=center&q=85"
+                alt="Operario en almacén logístico con tecnología"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.55, display: 'block' }}
+              />
+            </div>
+            {/* Stat blanca */}
             <div style={{
               position: 'absolute', bottom: '28px', left: '28px',
               background: 'rgba(255,255,255,0.97)', borderRadius: '12px',
-              padding: '14px 20px', backdropFilter: 'blur(8px)',
+              padding: '14px 20px',
             }}>
               <div style={{ fontSize: '28px', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.04em', lineHeight: 1 }}>99.8%</div>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>precisión media en picking</div>
             </div>
-            {/* Stat card top-right */}
+            {/* Stat naranja */}
             <div style={{
               position: 'absolute', top: '28px', right: '28px',
               background: 'var(--orange)', borderRadius: '12px',
