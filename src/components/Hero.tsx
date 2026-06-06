@@ -13,34 +13,41 @@ export default function Hero() {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
 
-    // Animated grid of dots
-    const dots: { x: number; y: number; opacity: number; speed: number }[] = []
-    const spacing = 48
+    // Animated grid of dots - navy/orange palette
+    const dots: { x: number; y: number; opacity: number; speed: number; orange: boolean }[] = []
+    const spacing = 52
     for (let x = 0; x < canvas.width; x += spacing) {
       for (let y = 0; y < canvas.height; y += spacing) {
-        dots.push({ x, y, opacity: Math.random() * 0.3, speed: 0.003 + Math.random() * 0.005 })
+        dots.push({
+          x, y,
+          opacity: Math.random() * 0.3,
+          speed: 0.002 + Math.random() * 0.005,
+          orange: Math.random() > 0.85,
+        })
       }
     }
 
+    // Animated lines between dots (barcode / scan effect)
     let frame = 0
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       frame++
       dots.forEach((dot, i) => {
-        dot.opacity = 0.04 + Math.abs(Math.sin(frame * dot.speed + i)) * 0.18
+        dot.opacity = 0.03 + Math.abs(Math.sin(frame * dot.speed + i)) * 0.15
         ctx.beginPath()
-        ctx.arc(dot.x, dot.y, 1.2, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0, 212, 255, ${dot.opacity})`
+        ctx.arc(dot.x, dot.y, 1.4, 0, Math.PI * 2)
+        if (dot.orange) {
+          ctx.fillStyle = `rgba(255, 77, 58, ${dot.opacity * 1.5})`
+        } else {
+          ctx.fillStyle = `rgba(100, 130, 200, ${dot.opacity})`
+        }
         ctx.fill()
       })
       requestAnimationFrame(animate)
     }
     animate()
 
-    const onResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
+    const onResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight }
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
@@ -52,28 +59,37 @@ export default function Hero() {
       display: 'flex',
       alignItems: 'center',
       overflow: 'hidden',
-      background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,102,255,0.15) 0%, transparent 60%), var(--black)',
+      background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,35,71,0.4) 0%, transparent 60%), var(--black)',
     }}>
-      {/* Animated dots canvas */}
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.6 }} />
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, opacity: 0.7 }} />
 
       {/* Glow orbs */}
       <div style={{
-        position: 'absolute', top: '20%', left: '60%',
+        position: 'absolute', top: '15%', right: '15%',
         width: '500px', height: '500px',
-        background: 'radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(40px)',
-        pointerEvents: 'none',
+        background: 'radial-gradient(circle, rgba(255,77,58,0.07) 0%, transparent 70%)',
+        borderRadius: '50%', filter: 'blur(40px)', pointerEvents: 'none',
       }} />
       <div style={{
-        position: 'absolute', top: '40%', left: '10%',
+        position: 'absolute', bottom: '20%', left: '5%',
         width: '400px', height: '400px',
-        background: 'radial-gradient(circle, rgba(0,102,255,0.06) 0%, transparent 70%)',
-        borderRadius: '50%',
-        filter: 'blur(60px)',
-        pointerEvents: 'none',
+        background: 'radial-gradient(circle, rgba(26,35,71,0.3) 0%, transparent 70%)',
+        borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none',
       }} />
+
+      {/* Barcode decoration */}
+      <div style={{
+        position: 'absolute', right: '8%', top: '50%', transform: 'translateY(-50%)',
+        display: 'flex', gap: '3px', opacity: 0.06, pointerEvents: 'none',
+      }}>
+        {Array.from({length: 28}).map((_, i) => (
+          <div key={i} style={{
+            width: i % 3 === 0 ? '4px' : i % 5 === 0 ? '2px' : '3px',
+            height: '280px',
+            background: 'white',
+          }} />
+        ))}
+      </div>
 
       {/* Content */}
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '1200px', margin: '0 auto', padding: '120px 40px 80px' }}>
@@ -81,29 +97,26 @@ export default function Hero() {
         <div className="animate-fade-up delay-1" style={{
           display: 'inline-flex', alignItems: 'center', gap: '8px',
           padding: '6px 16px 6px 8px',
-          background: 'var(--accent-dim)',
-          border: '1px solid rgba(0,212,255,0.2)',
+          background: 'var(--orange-dim)',
+          border: '1px solid rgba(255,77,58,0.25)',
           borderRadius: '100px',
           marginBottom: '32px',
         }}>
           <div style={{
             width: '6px', height: '6px', borderRadius: '50%',
-            background: 'var(--accent)',
-            boxShadow: '0 0 8px var(--accent)',
+            background: 'var(--orange)',
+            boxShadow: '0 0 8px var(--orange)',
+            animation: 'pulse-dot 2s ease-in-out infinite',
           }} />
-          <span style={{ fontFamily: 'var(--font-syne)', fontSize: '12px', fontWeight: 600, color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+          <span style={{ fontFamily: 'var(--font-syne)', fontSize: '12px', fontWeight: 600, color: 'var(--orange)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             Identificación · Movilidad · Trazabilidad
           </span>
         </div>
 
         {/* Headline */}
-        <h1 className="animate-fade-up delay-2" style={{ fontSize: 'clamp(44px, 6vw, 80px)', fontWeight: 800, maxWidth: '820px', marginBottom: '28px' }}>
+        <h1 className="animate-fade-up delay-2" style={{ fontSize: 'clamp(44px, 6vw, 78px)', fontWeight: 800, maxWidth: '860px', marginBottom: '28px' }}>
           Tecnología que conecta{' '}
-          <span style={{
-            background: 'var(--gradient-accent)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}>
+          <span style={{ background: 'var(--gradient-accent)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             operaciones,
           </span>
           {' '}personas y datos
@@ -113,9 +126,7 @@ export default function Hero() {
         <p className="animate-fade-up delay-3" style={{
           fontSize: '18px', fontWeight: 300,
           color: 'var(--text-secondary)',
-          maxWidth: '580px',
-          lineHeight: 1.7,
-          marginBottom: '48px',
+          maxWidth: '580px', lineHeight: 1.7, marginBottom: '48px',
         }}>
           Ayudamos a empresas de logística, industria y distribución a mejorar la trazabilidad, la movilidad y la eficiencia de sus procesos mediante soluciones tecnológicas avanzadas.
         </p>
@@ -128,16 +139,14 @@ export default function Hero() {
             background: 'var(--gradient-accent)',
             borderRadius: '100px',
             fontFamily: 'var(--font-syne)', fontWeight: 600, fontSize: '15px',
-            color: '#000',
+            color: '#fff',
             transition: 'transform 0.2s, box-shadow 0.2s',
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(0,212,255,0.3)' }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 40px rgba(255,77,58,0.35)' }}
           onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none' }}
           >
             Descubrir soluciones
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </a>
           <a href="#casos" style={{
             display: 'inline-flex', alignItems: 'center', gap: '10px',
@@ -149,7 +158,7 @@ export default function Hero() {
             color: 'var(--text-primary)',
             transition: 'border-color 0.2s, background 0.2s',
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.background = 'var(--accent-dim)' }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--orange)'; e.currentTarget.style.background = 'var(--orange-dim)' }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border-light)'; e.currentTarget.style.background = 'transparent' }}
           >
             Ver casos de éxito
@@ -159,8 +168,7 @@ export default function Hero() {
         {/* Stats row */}
         <div className="animate-fade-up delay-5" style={{
           display: 'flex', gap: '48px', flexWrap: 'wrap',
-          marginTop: '80px',
-          paddingTop: '48px',
+          marginTop: '80px', paddingTop: '48px',
           borderTop: '1px solid var(--border)',
         }}>
           {[
@@ -170,10 +178,10 @@ export default function Hero() {
             { num: '+30', label: 'Partners tecnológicos' },
           ].map(stat => (
             <div key={stat.label}>
-              <div style={{ fontFamily: 'var(--font-syne)', fontSize: '36px', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>
+              <div style={{ fontFamily: 'var(--font-syne)', fontSize: '36px', fontWeight: 800, color: 'var(--orange)', lineHeight: 1 }}>
                 {stat.num}
               </div>
-              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '6px', fontWeight: 400 }}>
+              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '6px' }}>
                 {stat.label}
               </div>
             </div>

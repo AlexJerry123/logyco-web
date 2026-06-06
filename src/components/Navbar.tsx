@@ -1,11 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const links = ['Soluciones', 'Sectores', 'Partners', 'Casos de éxito', 'Empresa']
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -19,30 +19,15 @@ export default function Navbar() {
       padding: '0 40px',
       height: '72px',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      background: scrolled ? 'rgba(8,12,16,0.92)' : 'transparent',
+      background: scrolled ? 'rgba(10,13,20,0.95)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px)' : 'none',
       borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
       transition: 'all 0.4s ease',
     }}>
       {/* Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <div style={{
-          width: '32px', height: '32px',
-          background: 'var(--gradient-accent)',
-          borderRadius: '8px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <rect x="1" y="1" width="7" height="7" rx="1.5" fill="white" fillOpacity="0.9"/>
-            <rect x="10" y="1" width="7" height="7" rx="1.5" fill="white" fillOpacity="0.5"/>
-            <rect x="1" y="10" width="7" height="7" rx="1.5" fill="white" fillOpacity="0.5"/>
-            <rect x="10" y="10" width="7" height="7" rx="1.5" fill="white" fillOpacity="0.9"/>
-          </svg>
-        </div>
-        <span style={{ fontFamily: 'var(--font-syne)', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.03em' }}>
-          LOGY<span style={{ color: 'var(--accent)' }}>CO</span>
-        </span>
-      </div>
+      <a href="/" style={{ display: 'flex', alignItems: 'center', height: '44px' }}>
+        <Image src="/logo.png" alt="Logística & Codificación" width={180} height={44} style={{ objectFit: 'contain', objectPosition: 'left' }} />
+      </a>
 
       {/* Desktop links */}
       <div style={{ display: 'flex', gap: '36px', alignItems: 'center' }} className="desktop-nav">
@@ -63,7 +48,7 @@ export default function Navbar() {
         padding: '10px 22px',
         background: 'var(--gradient-accent)',
         borderRadius: '100px',
-        color: '#000',
+        color: '#fff',
         letterSpacing: '0.02em',
         transition: 'opacity 0.2s, transform 0.2s',
       }}
