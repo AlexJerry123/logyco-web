@@ -1,3 +1,4 @@
+'use client'
 export default function Partners() {
   const partners = [
     'Zebra Technologies', 'Honeywell', 'Datalogic', 'SOTI',
