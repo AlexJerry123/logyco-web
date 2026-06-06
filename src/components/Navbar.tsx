@@ -23,7 +23,7 @@ export default function Navbar() {
       transition: 'border-color 0.3s',
     }}>
       <a href="/">
-        <Image src="/logo.png" alt="Logística & Codificación" width={155} height={38} style={{ objectFit: 'contain', objectPosition: 'left' }} />
+        <Image src="/logo.jpg" alt="Logística & Codificación" width={155} height={38} style={{ objectFit: 'contain', objectPosition: 'left' }} />
       </a>
       <div style={{ display: 'flex', gap: '28px' }} className="desk-nav">
         {links.map(l => (

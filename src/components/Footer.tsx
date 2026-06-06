@@ -8,7 +8,7 @@ export default function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', marginBottom: '48px' }}>
           <div>
             <div style={{ marginBottom: '16px', filter: 'brightness(0) invert(1)', opacity: 0.9 }}>
-              <Image src="/logo.png" alt="Logística & Codificación" width={150} height={38} style={{ objectFit: 'contain', objectPosition: 'left' }} />
+              <Image src="/logo.jpg" alt="Logística & Codificación" width={150} height={38} style={{ objectFit: 'contain', objectPosition: 'left' }} />
             </div>
             <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.7, maxWidth: '240px' }}>
               Especialistas en identificación automática, movilidad empresarial y trazabilidad industrial.
