@@ -4,27 +4,27 @@ import { useState } from 'react'
 const products = [
   {
     title: 'Impresoras',
-    img: 'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=400&h=267&fit=crop&crop=center&q=80',
+    img: '/impresora.jpg',
     items: ['Impresoras de etiquetas', 'Impresoras de tarjetas', 'Impresoras de brazaletes', 'Impresora de tiquets'],
   },
   {
     title: 'Lectores',
-    img: 'https://images.unsplash.com/photo-1563770660941-10fec3dd3e1a?w=400&h=267&fit=crop&crop=center&q=80',
+    img: '/lector.jpg',
     items: ['Lectores de código de barras', 'Lectores de sobremesa', 'Lectores industriales', 'Lectores de tarjetas'],
   },
   {
     title: 'Terminales',
-    img: 'https://images.unsplash.com/photo-1609078575318-d18a6d6bf64c?w=400&h=267&fit=crop&crop=center&q=80',
+    img: '/terminal.jpg',
     items: ['Terminales portátiles', 'Tablets industriales', 'Terminales de carretilla', 'Notebooks'],
   },
   {
     title: 'Etiquetas',
-    img: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=267&fit=crop&crop=center&q=80',
+    img: '/etiquetas.jpg',
     items: ['Etiquetas adhesivas', 'Ribbons', 'Brazaletes', 'Tarjetas'],
   },
   {
     title: 'Punto de Venta',
-    img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=267&fit=crop&crop=center&q=80',
+    img: '/pos.jpg',
     items: ['Sistemas TPV', 'Displays de cliente', 'Cajones portamonedas', 'Impresoras de ticket'],
   },
 ]
