@@ -52,7 +52,6 @@ export default function Footer() {
                                     }}
                                     style={{ display: 'inline-block', textDecoration: 'none' }}
                                 >
-                                    {/* Contenedor con fondo contrastante para el logo */}
                                     <div style={{
                                         background: '#ffffff',
                                         padding: '8px 12px',
@@ -74,10 +73,10 @@ export default function Footer() {
                         </div>
                         {cols.map(col => (
                             <div key={col.title}>
-                                <div style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '14px' }}>{col.title}</div>
+                                <div style={{ fontSize: '11px', fontWeight: 700, color: '#fff', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '14px' }}>{col.title}</div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                                     {col.links.map(link => (
-                                        <a key={link.label} href={link.href} style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', transition: 'color 0.15s' }}
+                                        <a key={link.label} href={link.href} style={{ fontSize: '13px', color: 'rgba(255, 255, 255, 0.45)', transition: 'color 0.15s' }}
                                             onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}
                                             onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
                                         >{link.label}</a>
