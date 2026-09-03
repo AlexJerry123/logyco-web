@@ -99,7 +99,7 @@ export default function Capabilities() {
           {caps.map((c) => {
             const Icon = c.icon
             return (
-              <a href="#contacto" className="cp-card" key={c.title}>
+              <a href="/contacto" className="cp-card" key={c.title}>
                 <span className="cp-topbar" />
                 <div className="cp-icon">
                   <Icon color="var(--orange)" />
@@ -142,7 +142,6 @@ export default function Capabilities() {
         }
         .cp-card:hover {
           transform: translateY(-4px);
-          border-color: var(--navy);
           box-shadow: 0 16px 32px rgba(10,22,40,0.1);
         }
 
