@@ -1,107 +1,152 @@
 'use client'
 
-export default function Hero() {
-  return (
-    <>
-      <section style={{ paddingTop: '64px', background: '#0a1628' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: '16px', overflow: 'hidden', marginTop: '16px' }} className="hero-grid">
+const brands = ['Zebra', 'Honeywell', 'Sunmi', 'Datalogic', 'TSC', 'Newland', 'Bixolon']
 
-            {/* LEFT */}
-            <div style={{ padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: '#0a1628', position: 'relative', overflow: 'hidden' }} className="hero-left">
-              <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.05 }} xmlns="http://www.w3.org/2000/svg">
-                <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5"/></pattern></defs>
-                <rect width="100%" height="100%" fill="url(#grid)"/>
-              </svg>
-              <div className="fu d1" style={{ fontSize: '11px', fontWeight: 600, color: '#e8401c', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', position: 'relative' }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#e8401c', display: 'inline-block', flexShrink: 0 }}></span>
-                Identificación · Movilidad · Trazabilidad
-              </div>
-              <h1 className="fu d2" style={{ fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, color: '#ffffff', marginBottom: '20px', position: 'relative' }}>
-                Integramos hardware. Diseñamos software.{' '}
-                <span style={{ color: '#e8401c' }}>Resolvemos logística.</span>
-              </h1>
-              <p className="fu d3" style={{ fontSize: 'clamp(14px, 1.5vw, 16px)', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, maxWidth: '420px', marginBottom: '32px', position: 'relative' }}>
-                Soluciones de identificación automática, movilidad y trazabilidad para logística, industria y distribución.
-              </p>
-              <div className="fu d4" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', position: 'relative' }}>
-                <a href="#contacto" style={{ padding: '13px 24px', background: '#e8401c', color: 'white', borderRadius: '8px', fontSize: '15px', fontWeight: 600, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                >Hablar con un experto →</a>
-                <a href="#soluciones" style={{ padding: '13px 24px', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '15px', fontWeight: 500, transition: 'border-color 0.2s', whiteSpace: 'nowrap' }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'}
-                >Ver soluciones</a>
-              </div>
-              <div className="fu d5" style={{ display: 'flex', marginTop: '40px', paddingTop: '32px', borderTop: '1px solid rgba(255,255,255,0.07)', position: 'relative' }}>
-                {[{ n: '+20', l: 'años experiencia' }, { n: '+500', l: 'proyectos' }, { n: '+30', l: 'partners' }].map((s, i) => (
-                  <div key={i} style={{ flex: 1, borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', paddingRight: i < 2 ? '16px' : '0', marginRight: i < 2 ? '16px' : '0' }}>
-                    <div style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 800, letterSpacing: '-0.04em', color: '#ffffff', lineHeight: 1 }}>{s.n}</div>
-                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '4px' }}>{s.l}</div>
-                  </div>
+function BrandMarquee() {
+    const loopBrands = [...brands, ...brands]
+    return (
+        <div
+            style={{
+                position: 'relative',
+                overflow: 'hidden',
+                padding: '24px 0 44px',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+                maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            }}
+        >
+            <div className="marquee-track" style={{ display: 'flex', width: 'max-content', gap: '64px' }}>
+                {loopBrands.map((b, i) => (
+                    <span
+                        key={i}
+                        style={{
+                            fontSize: 'clamp(28px, 3.8vw, 44px)',
+                            fontWeight: 800,
+                            letterSpacing: '-0.02em',
+                            textTransform: 'uppercase',
+                            color: '#ffffff',
+                            whiteSpace: 'nowrap',
+                        }}
+                    >
+                        {b}
+                    </span>
                 ))}
-              </div>
             </div>
-
-            {/* RIGHT */}
-            <div style={{ position: 'relative', overflow: 'hidden', background: '#0d1e35', minHeight: '300px' }} className="hero-right">
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0d1e35 0%, transparent 40%)', zIndex: 1 }} />
-              <img src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=900&h=600&fit=crop&crop=center&q=85"
-                alt="Almacén logístico" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.4, display: 'block' }} />
-              <div style={{ position: 'absolute', bottom: '20px', left: '20px', background: 'rgba(255,255,255,0.97)', borderRadius: '10px', padding: '12px 16px', zIndex: 2 }}>
-                <div style={{ fontSize: '24px', fontWeight: 800, color: '#0a1628', letterSpacing: '-0.04em', lineHeight: 1 }}>99.8%</div>
-                <div style={{ fontSize: '11px', color: '#6b7f95', marginTop: '3px' }}>precisión en picking</div>
-              </div>
-              <div style={{ position: 'absolute', top: '20px', right: '20px', background: '#e8401c', borderRadius: '10px', padding: '10px 14px', zIndex: 2 }}>
-                <div style={{ fontSize: '22px', fontWeight: 800, color: 'white', letterSpacing: '-0.04em', lineHeight: 1 }}>+20</div>
-                <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.85)', marginTop: '3px' }}>años experiencia</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* MOBILE */}
-      <div className="hero-mobile">
-        <div style={{ padding: '48px 24px' }}>
-          <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.16em', color: '#e8401c', textTransform: 'uppercase', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ width: '16px', height: '2px', background: '#e8401c', borderRadius: '1px', flexShrink: 0 }}></span>
-            Identificación · Movilidad · Trazabilidad
-          </div>
-          <h1 style={{ fontSize: '40px', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, color: '#fff', margin: '0 0 36px' }}>
-            Integramos hardware.<br />
-            Diseñamos software.<br />
-            <span style={{ color: '#e8401c' }}>Resolvemos logística.</span>
-          </h1>
-          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, margin: '0 0 36px', borderLeft: '2px solid rgba(232,64,28,0.4)', paddingLeft: '14px' }}>
-            Soluciones de identificación automática, movilidad y trazabilidad para logística, industria y distribución.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
-            <a href="#contacto" style={{ padding: '14px 20px', background: '#e8401c', color: 'white', borderRadius: '8px', fontSize: '15px', fontWeight: 600, textAlign: 'center' }}>Hablar con un experto →</a>
-            <a href="#soluciones" style={{ padding: '14px 20px', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.7)', borderRadius: '8px', fontSize: '15px', fontWeight: 500, textAlign: 'center' }}>Ver soluciones</a>
-          </div>
-          <div style={{ display: 'flex', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-            {[{ n: '+20', l: 'años experiencia' }, { n: '+500', l: 'proyectos' }, { n: '+30', l: 'partners' }].map((s, i) => (
-              <div key={i} style={{ flex: 1, borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none', paddingRight: i < 2 ? '12px' : '0', marginRight: i < 2 ? '12px' : '0' }}>
-                <div style={{ fontSize: '22px', fontWeight: 800, color: '#fff', letterSpacing: '-0.04em', lineHeight: 1 }}>{s.n}</div>
-                <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '3px' }}>{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; }
-        .hero-left { padding: 48px 40px; }
-        .hero-mobile { display: none; background: #0a1628; }
-        @media(max-width: 768px) {
-          .hero-grid { display: none; }
-          .hero-mobile { display: block; padding-top: 64px; }
+            <style>{`
+        .marquee-track { animation: marquee-scroll 30s linear infinite; }
+        @keyframes marquee-scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track { animation: none; }
         }
       `}</style>
-    </>
-  )
+        </div>
+    )
+}
+
+export default function Hero() {
+    const cardStyle = {
+        background: '#0a1628',
+        borderRadius: '28px',
+        border: '1px solid rgba(255,255,255,0.06)',
+        overflow: 'hidden',
+    }
+
+    return (
+        <>
+            <section style={{ background: '#FBD7C9' }}>
+                <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '112px 20px 0' }}>
+
+                    {/* DESKTOP: Tarjeta única con contenido centrado verticalmente */}
+                    <div style={{ ...cardStyle, position: 'relative', minHeight: '520px', display: 'flex', alignItems: 'center' }} className="hero-desktop-card">
+
+                        {/* Imagen de fondo ocupando toda la tarjeta */}
+                        <img
+                            src="/Zebras.png"
+                            alt="Zebras"
+                            style={{
+                                position: 'absolute',
+                                inset: 0,
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                objectPosition: 'center',
+                                display: 'block',
+                                zIndex: 1
+                            }}
+                        />
+
+                        <div style={{
+                            position: 'relative',
+                            zIndex: 2,
+                            maxWidth: '560px',
+                            padding: '56px 48px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            width: '100%'
+                        }}>
+                            <div className="fu d1" style={{ fontSize: '11px', fontWeight: 600, color: '#e8401c', letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#e8401c', display: 'inline-block', flexShrink: 0 }}></span>
+                                Identificación · Movilidad · Trazabilidad
+                            </div>
+                            <h1 className="fu d2" style={{ fontSize: 'clamp(24px, 3.2vw, 42px)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1, color: '#ffffff', marginBottom: '16px' }}>
+                                Integramos hardware. Diseñamos software.{' '}
+                                <span style={{ color: '#e8401c' }}>Resolvemos logística.</span>
+                            </h1>
+                            <p className="fu d3" style={{ fontSize: 'clamp(13px, 1.3vw, 15px)', color: 'rgba(255,255,255,0.75)', lineHeight: 1.7, maxWidth: '440px', marginBottom: '28px' }}>
+                                Soluciones de identificación automática, movilidad y trazabilidad para logística, industria y distribución.
+                            </p>
+                            <div className="fu d4" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                                <a href="/contacto" style={{ padding: '12px 22px', background: '#e8401c', color: 'white', borderRadius: '8px', fontSize: '14px', fontWeight: 600, transition: 'opacity 0.2s', whiteSpace: 'nowrap' }}
+                                    onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+                                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                                >Hablar con un experto →</a>
+                                <a href="#soluciones" style={{ padding: '12px 22px', border: '1px solid rgba(255,255,255,0.3)', color: '#ffffff', borderRadius: '8px', fontSize: '14px', fontWeight: 500, transition: 'border-color 0.2s, background 0.2s', whiteSpace: 'nowrap', background: 'rgba(0,0,0,0.2)' }}
+                                    onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.7)'; e.currentTarget.style.background = 'rgba(0,0,0,0.4)'; }}
+                                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; e.currentTarget.style.background = 'rgba(0,0,0,0.2)'; }}
+                                >Ver soluciones</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* MOBILE */}
+                    <div style={cardStyle} className="hero-mobile">
+                        <div style={{ padding: '44px 24px' }}>
+                            <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.16em', color: '#e8401c', textTransform: 'uppercase', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                <span style={{ width: '16px', height: '2px', background: '#e8401c', borderRadius: '1px', flexShrink: 0 }}></span>
+                                Identificación · Movilidad · Trazabilidad
+                            </div>
+                            <h1 style={{ fontSize: '32px', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, color: '#fff', margin: '0 0 32px' }}>
+                                Integramos hardware.<br />
+                                Diseñamos software.<br />
+                                <span style={{ color: '#e8401c' }}>Resolvemos logística.</span>
+                            </h1>
+                            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, margin: '0 0 32px', borderLeft: '2px solid rgba(232,64,28,0.4)', paddingLeft: '14px' }}>
+                                Soluciones de identificación automática, movilidad y trazabilidad para logística, industria y distribución.
+                            </p>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
+                                <a href="#contacto" style={{ padding: '13px 20px', background: '#e8401c', color: 'white', borderRadius: '8px', fontSize: '14px', fontWeight: 600, textAlign: 'center' }}>Hablar con un experto →</a>
+                                <a href="#soluciones" style={{ padding: '13px 20px', border: '1px solid rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.8)', borderRadius: '8px', fontSize: '14px', fontWeight: 500, textAlign: 'center' }}>Ver soluciones</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {/* Tira de marcas */}
+                <BrandMarquee />
+            </section>
+
+            <style>{`
+        .hero-mobile { display: none; margin-top: 20px; }
+        @media(max-width: 768px) {
+          .hero-desktop-card { display: none; }
+          .hero-mobile { display: block; }
+        }
+      `}</style>
+        </>
+    )
 }
