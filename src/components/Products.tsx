@@ -160,7 +160,7 @@ export default function Products() {
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <a href="#contacto" className="pr-cta">{current.cta}</a>
+                <a href="/contacto" className="pr-cta">{current.cta}</a>
               </div>
             </div>
           </div>
