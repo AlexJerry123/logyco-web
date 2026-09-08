@@ -63,7 +63,7 @@ export default function SectorGrid() {
             <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '60px 24px', width: '100%' }}>
                 <div style={{ marginBottom: '32px' }}>
                     <h2 style={{ fontSize: 'clamp(26px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.04em', color: 'var(--navy)', margin: '0 0 12px' }}>
-                        Donde aportamos valor
+                        Dónde aportamos valor
                     </h2>
                     <p style={{ fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.7, maxWidth: '560px', margin: 0 }}>
                         Más de dos décadas implantando soluciones en los entornos más exigentes.
